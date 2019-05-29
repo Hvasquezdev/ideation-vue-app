@@ -45,8 +45,4 @@ export default {
 .is-dark {
  @include mdc-button-container-fill-color(#404040);
 }
-
-    // padding: 20px 37px;
-    // height: 61px;
-    // border-radius: 35px;
 </style>

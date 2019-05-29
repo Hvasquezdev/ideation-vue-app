@@ -1,87 +1,139 @@
 <template>
   <div class="container is-fluid">
-    <div class="idea-title__container">
-      <h1 class="idea-title">
-        How can you launch an ideation protocol in the fastest manner possible so that it can be tested with 100 people before end of June 2019?
-      </h1>
-    </div>
-    <div class="idea-input-form__container">
-      <idea-form></idea-form>
-    </div>
-    <div class="idea-list__container">
-      <ul>
-        <li>
-          Idea abcdefghijklmnopqrstuv
-        </li>
-        <li>
-          Idea abcdefghijklmnopqrstuv
-        </li>
-        <li>
-          Idea abcdefghijklmnopqrstuv
-        </li>
-      </ul>
+    <div class="idea-items__container">
+
+      <!-- Main title of the page -->
+      <div class="idea-title__container">
+        <h1 class="idea-title">
+          How can you launch an ideation protocol in the fastest manner possible so that it can be tested with 100 people before end of June 2019?
+        </h1>
+      </div>
+
+      <!-- Input to set a new idea -->
+      <div class="idea-input-form__container">
+        <idea-form></idea-form>
+      </div>
+
+      <!-- List of ideas -->
+      <idea-list-container />
+
+      <!-- Chips -->
+      <idea-chips-time-container />
+
+      <!-- Pink background that grow with the timer -->
+      <div class="timer-bg" v-bind:style="{ height: `${bgHeight}%` }"></div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import IdeaForm from '@/components/IdeaForm.vue';
+import IdeaListContainer from '@/components/IdeaListContainer.vue';
+import IdeaChipsTimeContainer from '@/components/IdeaChipsTimeContainer.vue';
 
 export default {
   name: 'home-page',
   components: {
-    IdeaForm
+    IdeaForm,
+    IdeaListContainer,
+    IdeaChipsTimeContainer
+  },
+  data() {
+    return {
+      timer: 0,
+      intervalContainer: null,
+      bgHeight: 0
+    }
+  },
+  watch: {
+    'timer': function () {
+      if (this.timer >= 240) {
+        this.endCount();
+        this.$store.commit('TOGGLE_TYPING_STATUS', false);
+      }
+    },
+    'typingStatus': function () {
+      if (this.typingStatus) {
+        this.startCount();
+      }
+    },
+  },
+  methods: {
+    startCount() {
+      this.intervalContainer = setInterval(() => {
+        this.timer++;
+        this.bgHeight += 0.41666666666666666666666666666667;
+      }, 1000);
+    },
+    endCount() {
+      clearInterval(this.intervalContainer);
+      this.timer = 0;
+    }
+  },
+  computed: {
+    ...mapGetters({
+      typingStatus: 'getTypingStatus'
+    })
+  },
+  destroyed() {
+    if(this.intervalContainer) {
+      clearInterval(this.intervalContainer);
+    }
   },
 }
 </script>
 
 <style lang="scss">
 .container {
-  max-width: 1071px !important;
-  margin: auto !important;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding-top: 12%;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+
+  &.is-fluid {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 32px; 
+    padding-right: 32px;
+  }
+
+  .idea-input-form__container {
+    position: relative;
+    z-index: 10;
+  }
+
+  .idea-items__container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+    max-width: 1071px;
+    padding-top: 10%;
+    padding-bottom: 5%;
+  }
 
   .idea-title {
     font-family: 'Libre Baskerville', serif;
     font-size: 25px;
     font-weight: bold;
+    position: relative;
     color: #404040;
     max-width: 701px;
     padding-left: 75px;
     margin-bottom: 60px;
+    z-index: 10;
   }
 
-  .idea-list__container {
-    ul {
-      padding-left: 100px;
-      margin-top: 60px;
-
-      li {
-        font-family: 'Montserrat', sans-serif !important;
-        color: rgba(64, 64, 64, .33);
-        font-size: 20px;
-        position: relative;
-
-        &:before {
-          content: '';
-          position: absolute;
-          width: 11px;
-          height: 11px;
-          background-color: #fff;
-          border-radius: 50%;
-          border: 1px solid #FF7C7C;
-          left: -20px;
-          top: 10px;
-        }
-
-        &:not(:last-child) {
-          margin-bottom: 4px;
-        }
-      }
-    }
+  .timer-bg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #FF7C7C;
+    z-index: 0;
+    transition-duration: .3s;
+    transition-timing-function: ease-out;
   }
 }
 </style>
