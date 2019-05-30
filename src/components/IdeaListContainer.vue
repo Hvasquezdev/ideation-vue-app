@@ -44,28 +44,15 @@ export default {
 
       /* scroll style bar */
       &::-webkit-scrollbar-thumb {
-        background: #ccc;
+        background: rgba(255, 255, 255, .51);
+        border: 1px solid #FF7C7C;
         border-radius: 4px;
-      }
-
-      &::-webkit-scrollbar-thumb:active {
-        background-color: #999999;
-      }
-
-      &::-webkit-scrollbar-thumb:hover {
-        background: #b3b3b3;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
       }
 
       /* scroll track styles */
       &::-webkit-scrollbar-track {
-        background: #e1e1e1;
+        background: transparent;
         border-radius: 4px;
-      }
-
-      &::-webkit-scrollbar-track:hover, 
-      &::-webkit-scrollbar-track:active {
-        background: #d4d4d4;
       }
     }
   }

@@ -23,7 +23,7 @@ body {
 }
 
 @import url('https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css');
-@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:700|Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:700|Montserrat:400,500,700&display=swap');
 
 // font-family: 'Libre Baskerville', serif; Bold
 // font-family: 'Montserrat', sans-serif; Regular

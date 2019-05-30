@@ -18,7 +18,10 @@
       <idea-list-container />
 
       <!-- Chips -->
-      <idea-chips-time-container />
+      <chips-time-container />
+
+      <!-- Rate your session and know the total of ideas -->
+      <rating-card></rating-card>
 
       <!-- Pink background that grow with the timer -->
       <div class="timer-bg" v-bind:style="{ height: `${bgHeight}%` }"></div>
@@ -30,14 +33,16 @@
 import { mapGetters } from 'vuex';
 import IdeaForm from '@/components/IdeaForm.vue';
 import IdeaListContainer from '@/components/IdeaListContainer.vue';
-import IdeaChipsTimeContainer from '@/components/IdeaChipsTimeContainer.vue';
+import ChipsTimeContainer from '@/components/ChipsTimeContainer.vue';
+import RatingCard from '@/components/RatingCard.vue';
 
 export default {
   name: 'home-page',
   components: {
     IdeaForm,
     IdeaListContainer,
-    IdeaChipsTimeContainer
+    ChipsTimeContainer,
+    RatingCard
   },
   data() {
     return {
@@ -53,9 +58,11 @@ export default {
         this.$store.commit('TOGGLE_TYPING_STATUS', false);
       }
     },
-    'typingStatus': function () {
+    'typingStatus': function (value, oldValue) {
       if (this.typingStatus) {
         this.startCount();
+      } else if(!value && value !== oldValue) {
+        this.$store.dispatch('SAVE_IDEAS_SESSION');
       }
     },
   },
@@ -80,6 +87,7 @@ export default {
     if(this.intervalContainer) {
       clearInterval(this.intervalContainer);
     }
+    this.$store.commit('CLEAR_SESSION');
   },
 }
 </script>

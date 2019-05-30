@@ -42,7 +42,7 @@ export default {
   methods: {
     setNewIdea() {
       if (!this.form.idea) return;
-      if (!this.typingStatus) this.startTyping();
+      if (this.form.idea && !this.typingStatus) this.startTyping();
       this.$store.dispatch('SET_NEW_IDEA', this.form.idea);
       this.form.idea = null;
     },
