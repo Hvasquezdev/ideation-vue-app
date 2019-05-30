@@ -5,7 +5,7 @@
       <!-- Main title of the page -->
       <div class="idea-title__container">
         <h1 class="idea-title">
-          How can you launch an ideation protocol in the fastest manner possible so that it can be tested with 100 people before end of June 2019?
+          How can you launch an ideation protocol in the fastest manner possible so that it can be tested with 100 people before end of June 2019? {{ timer }}
         </h1>
       </div>
 
@@ -69,9 +69,9 @@ export default {
   methods: {
     startCount() {
       this.intervalContainer = setInterval(() => {
-        this.timer++;
-        this.bgHeight += 0.41666666666666666666666666666667;
-      }, 1000);
+        this.timer += 1.2;
+        this.bgHeight += (0.41666666666666666666666666666667 * 1.2);
+      }, 1200);
     },
     endCount() {
       clearInterval(this.intervalContainer);
@@ -140,8 +140,7 @@ export default {
     right: 0;
     background: #FF7C7C;
     z-index: 0;
-    transition-duration: .3s;
-    transition-timing-function: ease-out;
+    transition: 0.4s linear;
   }
 }
 </style>

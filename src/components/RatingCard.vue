@@ -16,8 +16,12 @@
         <h3>
           rate the quality of your session
         </h3>
-        <span>
-          <base-radio-button />
+        <span class="radio-buttons__container">
+          <base-radio-button name="calification" :label="1" :value="selectedValue" @change="changeValue" />
+          <base-radio-button name="calification" :label="2" :value="selectedValue" @change="changeValue" />
+          <base-radio-button name="calification" :label="3" :value="selectedValue" @change="changeValue" />
+          <base-radio-button name="calification" :label="4" :value="selectedValue" @change="changeValue" />
+          <base-radio-button name="calification" :label="5" :value="selectedValue" @change="changeValue" />
         </span>
       </div>
     </div>
@@ -28,10 +32,20 @@
 import BaseRadioButton from '@/components/base-components/BaseRadioButton.vue';
 
 export default {
- name: 'rating-card',
- components: {
-   BaseRadioButton,
- }
+  name: 'rating-card',
+  components: {
+    BaseRadioButton,
+  },
+  data() {
+    return {
+      selectedValue: 0,
+    }
+  },
+  methods: {
+    changeValue: function(newValue) {
+      this.selectedValue = newValue;
+    }
+  }
 }
 </script>
 
@@ -78,6 +92,14 @@ export default {
 
   .rating-calification-field {
     margin-top: 22px;
+
+    .radio-buttons__container {
+      .label--radio {
+        &:not(:last-child) {
+          padding-right: 11px;
+        }
+      }
+    }
   }
 
   .rating-card {

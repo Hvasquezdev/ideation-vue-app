@@ -1,12 +1,24 @@
 <template>
   <label class="label--radio">
-    <input type="radio" class="radio" >
+    <input type="radio" class="radio" :value="label" :name="name" v-model="radioButtonValue" >
   </label>
 </template>
 
 <script>
 export default {
   name: 'base-radio-button',
+  props: ['name', 'label', 'value'],
+  computed: {
+    radioButtonValue: {
+      get: function() {
+        return this.value
+      },
+      set: function() {
+        // Communicate the change to parent component so that selectedValue can be updated
+        this.$emit("change", this.label)
+      }
+    }
+  }
 }
 </script>
 
