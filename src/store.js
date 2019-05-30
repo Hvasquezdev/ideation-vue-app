@@ -14,6 +14,8 @@ export default new Vuex.Store({
 
   getters: {
     getIdeas: (state) => state.ideas,
+    getTotalIdeas: (state) => state.ideas.length,
+    getIdeasPerMinute: (state) => (state.ideas.length / 4).toFixed(2),
     getTypingStatus: (state) => state.isTypingIdeas,
     getSessionStatus: (state) => state.sessionStatus,
     getCalification: (state) => state.calification,

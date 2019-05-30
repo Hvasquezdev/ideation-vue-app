@@ -21,7 +21,9 @@
       <idea-list-container />
 
       <!-- Rate your session and know the total of ideas -->
-      <rating-card v-if="sessionStatus === 'saving'" />
+      <transition name="fade">
+        <rating-card v-if="sessionStatus === 'saving'" />
+      </transition>
 
       <!-- Pink background that grow with the timer -->
       <div class="timer-bg" v-bind:style="{ height: `${bgHeight}%` }"></div>
@@ -48,7 +50,7 @@ export default {
     return {
       timer: 0,
       intervalContainer: null,
-      bgHeight: 0
+      bgHeight: 0,
     }
   },
   watch: {
@@ -150,5 +152,45 @@ export default {
     z-index: 0;
     transition: 0.4s linear;
   }
+}
+
+@-webkit-keyframes fadeInRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active
+ {
+  transition: transform 0.4s ease;
+}
+.fade-enter,
+.fade-leave-to
+ {
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
 }
 </style>

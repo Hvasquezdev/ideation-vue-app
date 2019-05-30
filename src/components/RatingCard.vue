@@ -6,10 +6,10 @@
     <div class="rating-card">
       <div class="rating-total-ideas-text">
         <h3>
-          you produced 17 ideas
+          you produced {{ totalIdeas }} ideas
         </h3>
         <span>
-          4.27 ideas / mn.
+          {{ ideasPerMin }} ideas / mn.
         </span>
       </div>
       <div class="rating-calification-field">
@@ -54,6 +54,8 @@ export default {
   computed: {
     ...mapGetters({
       selectedValue: 'getCalification',
+      totalIdeas: 'getTotalIdeas',
+      ideasPerMin: 'getIdeasPerMinute',
     }),
   },
 }

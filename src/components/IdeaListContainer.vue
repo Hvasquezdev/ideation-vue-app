@@ -1,7 +1,7 @@
 <template>
   <div class="idea-list__container">
     <ul v-if="ideas">
-      <idea-list-item v-for="(idea, index) in ideas" :key="index">
+      <idea-list-item v-for="(idea, index) in ideas.slice().reverse()" :key="index">
         {{ idea }}
       </idea-list-item>
     </ul>
