@@ -16,15 +16,22 @@
         <h3>
           rate the quality of your session
         </h3>
-        <!-- TODO selector of calification -->
+        <span>
+          <base-radio-button />
+        </span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import BaseRadioButton from '@/components/base-components/BaseRadioButton.vue';
+
 export default {
- name: 'rating-card'
+ name: 'rating-card',
+ components: {
+   BaseRadioButton,
+ }
 }
 </script>
 

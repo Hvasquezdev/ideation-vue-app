@@ -11,7 +11,7 @@
 
       <!-- Input to set a new idea -->
       <div class="idea-input-form__container">
-        <idea-form></idea-form>
+        <idea-form />
       </div>
 
       <!-- List of ideas -->
@@ -21,7 +21,7 @@
       <chips-time-container />
 
       <!-- Rate your session and know the total of ideas -->
-      <rating-card></rating-card>
+      <rating-card />
 
       <!-- Pink background that grow with the timer -->
       <div class="timer-bg" v-bind:style="{ height: `${bgHeight}%` }"></div>

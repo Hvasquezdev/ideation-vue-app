@@ -35,6 +35,7 @@ export default {
       margin-top: 60px;
       max-height: 350px;
       overflow-y: scroll;
+      overflow-x: hidden;
 
       /* size of the scroll */
       &::-webkit-scrollbar {
