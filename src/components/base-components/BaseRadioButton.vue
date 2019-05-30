@@ -23,9 +23,15 @@ export default {
 </script>
 
 <style lang="scss">
+.label--radio {
+  width: 20px;
+  height: 20px;
+}
 .radio {
   position: relative;
-  margin: 0 1rem 0 0 ;
+  width: 20px;
+  height: 20px;
+  margin-right: 16px;
   
   cursor: pointer;
   

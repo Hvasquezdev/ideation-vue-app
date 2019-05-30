@@ -1,5 +1,5 @@
 <template>
-  <div class="rating-container">
+  <div class="rating-container"> <!-- TODO: add animation when this card appears -->
     <h2 class="rating-message">
       Well done!
     </h2>
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import BaseRadioButton from '@/components/base-components/BaseRadioButton.vue';
 
 export default {
@@ -36,16 +37,25 @@ export default {
   components: {
     BaseRadioButton,
   },
-  data() {
-    return {
-      selectedValue: 0,
+  watch: {
+    'selectedValue': function(value) {
+      if(value > 0) {
+        this.$store.dispatch('SAVE_IDEAS_SESSION');
+      }
     }
   },
   methods: {
     changeValue: function(newValue) {
-      this.selectedValue = newValue;
-    }
-  }
+      if(this.selectedValue === 0){
+        this.$store.commit('SET_CALIFICATION', newValue);
+      }
+    },
+  },
+  computed: {
+    ...mapGetters({
+      selectedValue: 'getCalification',
+    }),
+  },
 }
 </script>
 
@@ -92,14 +102,6 @@ export default {
 
   .rating-calification-field {
     margin-top: 22px;
-
-    .radio-buttons__container {
-      .label--radio {
-        &:not(:last-child) {
-          padding-right: 11px;
-        }
-      }
-    }
   }
 
   .rating-card {

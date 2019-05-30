@@ -1,11 +1,14 @@
 <template>
   <div class="container is-fluid">
+    <!-- Chips -->
+    <chips-time-container />
+
     <div class="idea-items__container">
 
       <!-- Main title of the page -->
       <div class="idea-title__container">
         <h1 class="idea-title">
-          How can you launch an ideation protocol in the fastest manner possible so that it can be tested with 100 people before end of June 2019? {{ timer }}
+          How can you launch an ideation protocol in the fastest manner possible so that it can be tested with 100 people before end of June 2019?
         </h1>
       </div>
 
@@ -17,11 +20,8 @@
       <!-- List of ideas -->
       <idea-list-container />
 
-      <!-- Chips -->
-      <chips-time-container />
-
       <!-- Rate your session and know the total of ideas -->
-      <rating-card />
+      <rating-card v-if="sessionStatus === 'saving'" />
 
       <!-- Pink background that grow with the timer -->
       <div class="timer-bg" v-bind:style="{ height: `${bgHeight}%` }"></div>
@@ -58,16 +58,22 @@ export default {
         this.$store.commit('TOGGLE_TYPING_STATUS', false);
       }
     },
-    'typingStatus': function (value, oldValue) {
+    'typingStatus': function () {
       if (this.typingStatus) {
         this.startCount();
-      } else if(!value && value !== oldValue) {
-        this.$store.dispatch('SAVE_IDEAS_SESSION');
+      } 
+    },
+    'sessionStatus': function (value) {
+      if (value === 'completed') {
+        this.$store.commit('CLEAR_SESSION');
+        this.bgHeight = 0;
+        this.timer = 0;
       }
     },
   },
   methods: {
     startCount() {
+      this.$store.commit('SET_SESSION_STATUS', 'inProcess');
       this.intervalContainer = setInterval(() => {
         this.timer += 1.2;
         this.bgHeight += (0.41666666666666666666666666666667 * 1.2);
@@ -75,13 +81,15 @@ export default {
     },
     endCount() {
       clearInterval(this.intervalContainer);
+      this.$store.commit('SET_SESSION_STATUS', 'saving');
       this.timer = 0;
     }
   },
   computed: {
     ...mapGetters({
-      typingStatus: 'getTypingStatus'
-    })
+      typingStatus: 'getTypingStatus',
+      sessionStatus: 'getSessionStatus',
+    }),
   },
   destroyed() {
     if(this.intervalContainer) {
