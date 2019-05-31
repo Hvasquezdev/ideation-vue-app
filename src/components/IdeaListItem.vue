@@ -16,6 +16,7 @@ export default {
     color: rgba(64, 64, 64, .33);
     font-size: 20px;
     position: relative;
+    word-break: break-all;
 
     &:before {
       content: '';
