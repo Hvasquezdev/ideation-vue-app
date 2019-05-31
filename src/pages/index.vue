@@ -128,7 +128,6 @@ export default {
     width: 100%;
     max-width: 1071px;
     padding-top: 10%;
-    padding-bottom: 5%;
   }
 
   .idea-title {

@@ -1,6 +1,6 @@
 <template>
   <div class="idea-list__container">
-    <ul style="max-height: 350px !important;">
+    <ul v-if="ideas">
       <idea-list-item v-for="(idea, index) in ideas.slice().reverse()" :key="index">
         {{ idea }}
       </idea-list-item>
@@ -35,6 +35,7 @@ export default {
       margin-top: 60px;
       overflow-y: scroll;
       overflow-x: hidden;
+      max-height: 350px;
 
       /* size of the scroll */
       &::-webkit-scrollbar {
