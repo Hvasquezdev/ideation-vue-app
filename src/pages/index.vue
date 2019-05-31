@@ -185,7 +185,7 @@ export default {
 .fade-enter-active,
 .fade-leave-active
  {
-  transition: transform 0.4s ease;
+  transition: transform 0.3s ease;
 }
 .fade-enter,
 .fade-leave-to

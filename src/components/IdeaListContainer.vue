@@ -1,6 +1,6 @@
 <template>
   <div class="idea-list__container">
-    <ul v-if="ideas">
+    <ul style="max-height: 350px !important;">
       <idea-list-item v-for="(idea, index) in ideas.slice().reverse()" :key="index">
         {{ idea }}
       </idea-list-item>
@@ -33,7 +33,6 @@ export default {
     ul {
       padding-left: 100px;
       margin-top: 60px;
-      max-height: 350px;
       overflow-y: scroll;
       overflow-x: hidden;
 
